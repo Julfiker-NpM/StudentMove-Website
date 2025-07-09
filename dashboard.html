@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudentMove - Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+  <!-- Top Horizontal Navigation Bar -->
+  <header class="custom-navbar">
+    <div class="nav-content">
+      <div class="logo-circle">
+        <img src="assets/logo.png" alt="StudentMove" />
+      </div>
+      <nav class="main-menu">
+        <a href="dashboard.html">Home</a>
+        <a href="notification_Version4.html">Notifications</a>
+        <a href="messages_Version4.html">Contact</a>
+        <a href="offers_Version4.html">Offers</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <!-- Greeting/Profile Section -->
+    <section class="main-greeting-section">
+      <div class="profile-row">
+        <div class="main-greeting">
+          <div class="greeting-text">
+            Welcome back, <span class="blue-text">Ready to plan your journey?</span>
+          </div>
+          <p class="dashboard-subtitle">What do you want to do today?</p>
+        </div>
+        <div class="profile-pic">
+          <a href="profile-settings.html" style="text-decoration: none; display: block;">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" />
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Subscription CTA Button -->
+    <div class="dashboard-cta-row">
+      <a href="subscription.html" class="dashboard-cta-btn">
+        <i class="bi bi-star-fill"></i> Subscribe Now
+      </a>
+    </div>
+
+    <!-- Cards Grid -->
+    <main>
+      <div class="dashboard-section">
+        <h2>Dashboard</h2>
+        <div class="dashboard-cards">
+          <a href="next-bus-arrival.html" class="dashboard-card blue" style="text-decoration:none;">
+            <div class="card-title">Next Bus Arrival</div>
+            <div class="card-desc">upcoming bus arrivals</div>
+            <span class="arrow">&rarr;</span>
+          </a>
+          <a href="#" class="dashboard-card green" style="text-decoration:none;">
+            <div class="card-title">Personalized Route Suggestion</div>
+            <div class="card-desc">Recommend routes</div>
+            <span class="arrow">&rarr;</span>
+          </a>
+          <div class="dashboard-card">
+            <div class="card-title">Past Routes Taken</div>
+            <div class="card-desc">
+              <a href="#" class="route-link">Uttara to DSC</a><br>
+              <a href="#" class="route-link">Uttara to DU</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-activity-section">
+        <h2>Recent Activity</h2>
+        <div class="dashboard-cards">
+          <div class="dashboard-card green">
+            <div class="card-title">Feedback Submitted</div>
+            <div class="card-desc">Your feedback</div>
+           
+          </div>
+          <div class="dashboard-card red">
+            <div class="card-title">Click to know about the offer</div>
+       
+          </div>
+          <!-- Optional: Map or other card here -->
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

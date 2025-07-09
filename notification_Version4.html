@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notification - StudentMove</title>
+  <link rel="stylesheet" href="notification.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="custom-navbar">
+    <div class="nav-content">
+      <div class="logo-circle">
+        <img src="assets/logo.png" alt="StudentMove" />
+      </div>
+      <nav class="main-menu">
+        <a href="dashboard.html">Home</a>
+        <a href="notification_Version4.html" class="active">Notifications</a>
+        <a href="messages_Version4.html">Contact</a>
+        <a href="offers_Version4.html">Offers</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <section class="notification-section">
+      <h2 class="section-title"><i class="bi bi-bell"></i> Notifications</h2>
+      <div class="notification-list">
+        <div class="notification-card">
+          <div class="notification-icon blue"><i class="bi bi-bus-front"></i></div>
+          <div>
+            <div class="notification-message">Your bus #7 is arriving in 5 minutes!</div>
+            <small class="notification-time">2 min ago</small>
+          </div>
+        </div>
+        <div class="notification-card">
+          <div class="notification-icon green"><i class="bi bi-check-circle"></i></div>
+          <div>
+            <div class="notification-message">Your feedback was received. Thank you!</div>
+            <small class="notification-time">1 hour ago</small>
+          </div>
+        </div>
+        <div class="notification-card">
+          <div class="notification-icon red"><i class="bi bi-gift"></i></div>
+          <div>
+            <div class="notification-message">Special Offer: 30% off for students!</div>
+            <small class="notification-time">1 day ago</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

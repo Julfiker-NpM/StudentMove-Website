@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subscribe - StudentMove</title>
+  <link rel="stylesheet" href="notification.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    .subscription-container {
+      max-width: 900px;
+      margin: 38px auto 0 auto;
+      padding: 0 18px;
+    }
+    .subscription-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .subscription-desc {
+      color: #555;
+      font-size: 1.08rem;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .package-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.06);
+      padding: 24px 20px;
+      text-align: center;
+      transition: transform 0.14s, box-shadow 0.14s;
+      border: 2px solid transparent;
+    }
+    .package-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px 0 rgba(13,110,253,0.15);
+    }
+    .package-card.selected {
+      border-color: #0d6efd;
+      background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+    }
+    .package-card.popular {
+      border-color: #0d6efd;
+      position: relative;
+    }
+    .popular-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0d6efd;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .package-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 8px;
+    }
+    .package-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1e32db;
+      margin-bottom: 4px;
+    }
+    .package-period {
+      color: #6c757d;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .package-daily {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .package-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+      text-align: left;
+    }
+    .package-features li {
+      padding: 4px 0;
+      color: #333;
+      font-size: 0.95rem;
+    }
+    .package-features i {
+      color: #22c55e;
+      margin-right: 8px;
+    }
+    .choose-btn {
+      background: linear-gradient(90deg,#0d6efd 80%,#4d9fff 100%);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.13s;
+      width: 100%;
+    }
+    .choose-btn:hover {
+      background: linear-gradient(90deg,#2563eb 80%,#0d6efd 100%);
+      transform: translateY(-2px);
+    }
+    .payment-section {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px 0 rgba(0,0,0,0.06);
+      padding: 32px 24px 28px 24px;
+      display: none;
+    }
+    .payment-section.show {
+      display: block;
+    }
+    .selected-package-info {
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: #f8f9ff;
+      border-radius: 12px;
+      border: 1px solid #e3edff;
+    }
+    .payment-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .payment-tab {
+      background: #f5f7fa;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px 8px 0 0;
+      font-size: 1.08rem;
+      color: #555;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.13s, color 0.13s;
+    }
+    .payment-tab.active {
+      background: #0d6efd;
+      color: #fff;
+      font-weight: 700;
+    }
+    .payment-form {
+      background: #f7f9fd;
+      border-radius: 0 0 12px 12px;
+      padding: 22px 16px 18px 16px;
+      margin-bottom: 18px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-label {
+      display: block;
+      font-size: 1.01rem;
+      color: #333;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.3px solid #dbeafe;
+      border-radius: 7px;
+      font-size: 1.05rem;
+      background: #fff;
+      margin-bottom: 2px;
+    }
+    .subscribe-btn {
+      width: 100%;
+      background: linear-gradient(90deg,#0d6efd 80%,#4d9fff 100%);
+      color: #fff;
+      font-size: 1.18rem;
+      font-weight: 700;
+      padding: 14px 0;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      box-shadow: 0 4px 16px 0 rgba(13,110,253,0.10);
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.13s;
+    }
+    .subscribe-btn:hover {
+      background: linear-gradient(90deg,#2563eb 80%,#0d6efd 100%);
+      transform: translateY(-2px) scale(1.02);
+    }
+    @media (max-width: 600px) {
+      .subscription-container {
+        max-width: 98vw;
+        padding: 0 4vw;
+      }
+      .packages-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .package-card {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="custom-navbar">
+    <div class="nav-content">
+      <div class="logo-circle">
+        <img src="assets/logo.png" alt="StudentMove" />
+      </div>
+      <nav class="main-menu">
+        <a href="dashboard.html">Home</a>
+        <a href="notification_Version4.html">Notifications</a>
+        <a href="messages_Version4.html">Contact</a>
+        <a href="offers_Version4.html">Offers</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="subscription-container">
+    <div class="subscription-title"><i class="bi bi-star-fill"></i> Choose Your Plan</div>
+    <div class="subscription-desc">Select the perfect plan for your journey. All plans include real-time tracking and notifications.</div>
+
+    <!-- Package Selection -->
+    <div class="packages-grid">
+      <!-- Monthly Plan -->
+      <div class="package-card" data-plan="monthly" data-price="1500" data-name="Monthly Plan">
+        <div class="package-name">Monthly Plan</div>
+        <div class="package-price">৳1,500</div>
+        <div class="package-period">/month</div>
+        <div class="package-daily">BDT 50 per day</div>
+        <ul class="package-features">
+          <li><i class="bi bi-check-circle-fill"></i>Real-time bus tracking</li>
+          <li><i class="bi bi-check-circle-fill"></i>Route planning & scheduling</li>
+          <li><i class="bi bi-check-circle-fill"></i>Delay notifications</li>
+          <li><i class="bi bi-check-circle-fill"></i>24/7 customer support</li>
+          <li><i class="bi bi-check-circle-fill"></i>Mobile app access</li>
+        </ul>
+        <button class="choose-btn" onclick="selectPackage('monthly', 'Monthly Plan', '৳1,500')">Choose Monthly</button>
+      </div>
+
+      <!-- 6 Months Plan -->
+      <div class="package-card popular" data-plan="6months" data-price="8100" data-name="6 Months Plan">
+        <div class="popular-badge">Most Popular</div>
+        <div class="package-name">6 Months Plan</div>
+        <div class="package-price">৳8,100</div>
+        <div class="package-period">/6 months</div>
+        <div class="package-daily">BDT 45 per day (Save 10%)</div>
+        <ul class="package-features">
+          <li><i class="bi bi-check-circle-fill"></i>Everything in Monthly</li>
+          <li><i class="bi bi-check-circle-fill"></i>Priority customer support</li>
+          <li><i class="bi bi-check-circle-fill"></i>Advanced route analytics</li>
+          <li><i class="bi bi-check-circle-fill"></i>Custom notifications</li>
+          <li><i class="bi bi-check-circle-fill"></i>Exclusive student discounts</li>
+        </ul>
+        <button class="choose-btn" onclick="selectPackage('6months', '6 Months Plan', '৳8,100')">Choose 6 Months</button>
+      </div>
+
+      <!-- 1 Year Plan -->
+      <div class="package-card" data-plan="yearly" data-price="14400" data-name="1 Year Plan">
+        <div class="package-name">1 Year Plan</div>
+        <div class="package-price">৳14,400</div>
+        <div class="package-period">/year</div>
+        <div class="package-daily">BDT 40 per day (Save 20%)</div>
+        <ul class="package-features">
+          <li><i class="bi bi-check-circle-fill"></i>Everything in 6 Months</li>
+          <li><i class="bi bi-check-circle-fill"></i>VIP customer support</li>
+          <li><i class="bi bi-check-circle-fill"></i>Personal route optimization</li>
+          <li><i class="bi bi-check-circle-fill"></i>Early access to new features</li>
+          <li><i class="bi bi-check-circle-fill"></i>Free premium workshops</li>
+        </ul>
+        <button class="choose-btn" onclick="selectPackage('yearly', '1 Year Plan', '৳14,400')">Choose Yearly</button>
+      </div>
+    </div>
+
+    <!-- Payment Section -->
+    <div class="payment-section" id="payment-section">
+      <div class="selected-package-info">
+        <h4>Selected Plan: <span id="selected-plan-name">-</span></h4>
+        <p>Total Amount: <span id="selected-plan-price">-</span></p>
+      </div>
+
+      <div class="payment-tabs">
+        <button class="payment-tab active" id="tab-card" onclick="showTab('card')"><i class="bi bi-credit-card"></i> Card Payment</button>
+        <button class="payment-tab" id="tab-mobile" onclick="showTab('mobile')"><i class="bi bi-phone"></i> Mobile Banking</button>
+      </div>
+
+      <form class="payment-form" id="form-card">
+        <div class="form-group">
+          <label class="form-label">Card Number</label>
+          <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" required />
+        </div>
+        <div class="form-group" style="display:flex; gap:10px;">
+          <div style="flex:1;">
+            <label class="form-label">Expiry</label>
+            <input type="text" class="form-input" placeholder="MM/YY" maxlength="5" required />
+          </div>
+          <div style="flex:1;">
+            <label class="form-label">CVV</label>
+            <input type="password" class="form-input" placeholder="123" maxlength="4" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Name on Card</label>
+          <input type="text" class="form-input" placeholder="Full Name" required />
+        </div>
+        <button type="submit" class="subscribe-btn"><i class="bi bi-lock-fill"></i> Subscribe Now</button>
+      </form>
+
+      <form class="payment-form" id="form-mobile" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Provider</label>
+          <select class="form-select" required>
+            <option value="">Select Provider</option>
+            <option value="bkash">bKash</option>
+            <option value="nagad">Nagad</option>
+            <option value="rocket">Rocket</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Account/Number</label>
+          <input type="text" class="form-input" placeholder="01XXXXXXXXX" maxlength="15" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Transaction ID</label>
+          <input type="text" class="form-input" placeholder="Enter Transaction ID" required />
+        </div>
+        <button type="submit" class="subscribe-btn"><i class="bi bi-lock-fill"></i> Subscribe Now</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function selectPackage(plan, name, price) {
+      // Remove selected class from all cards
+      document.querySelectorAll('.package-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      
+      // Add selected class to clicked card
+      event.target.closest('.package-card').classList.add('selected');
+      
+      // Update payment section
+      document.getElementById('selected-plan-name').textContent = name;
+      document.getElementById('selected-plan-price').textContent = price;
+      document.getElementById('payment-section').classList.add('show');
+      
+      // Scroll to payment section
+      document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showTab(tab) {
+      document.getElementById('tab-card').classList.remove('active');
+      document.getElementById('tab-mobile').classList.remove('active');
+      document.getElementById('form-card').style.display = 'none';
+      document.getElementById('form-mobile').style.display = 'none';
+      if(tab === 'card') {
+        document.getElementById('tab-card').classList.add('active');
+        document.getElementById('form-card').style.display = 'block';
+      } else {
+        document.getElementById('tab-mobile').classList.add('active');
+        document.getElementById('form-mobile').style.display = 'block';
+      }
+    }
+    
+    // Prevent actual form submission
+    document.getElementById('form-card').onsubmit = function(e){e.preventDefault();alert('Payment processing (demo only).');};
+    document.getElementById('form-mobile').onsubmit = function(e){e.preventDefault();alert('Payment processing (demo only).');};
+  </script>
+</body>
+</html> 
